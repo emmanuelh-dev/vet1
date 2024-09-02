@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6">Editar Datos COVID-19</h1>
+
+    <form method="post" class="space-y-8">
+        {% csrf_token %}
+
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4">Estadísticas Globales</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="total_cases" class="block text-sm font-medium text-gray-700">Casos Totales</label>
+                    <input type="number" name="total_cases" id="total_cases" value="{{ global_stats.total_cases }}"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                </div>
+                <div>
+                    <label for="total_deaths" class="block text-sm font-medium text-gray-700">Muertes Totales</label>
+                    <input type="number" name="total_deaths" id="total_deaths" value="{{ global_stats.total_deaths }}"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                </div>
+                <div>
+                    <label for="total_recovered" class="block text-sm font-medium text-gray-700">Recuperados Totales</label>
+                    <input type="number" name="total_recovered" id="total_recovered" value="{{ global_stats.total_recovered }}"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                </div>
+                <div>
+                    <label for="active_cases" class="block text-sm font-medium text-gray-700">Casos Activos</label>
+                    <input type="number" name="active_cases" id="active_cases" value="{{ global_stats.active_cases }}"
+                           class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-semibold mb-4">Datos por País</h2>
+            <div class="space-y-6">
+                {% for country in countries %}
+                <div class="border-t pt-4">
+                    <h3 class="text-lg font-medium mb-2">{{ country.name }}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="country_{{ country.id }}_cases" class="block text-sm font-medium text-gray-700">Casos Totales</label>
+                            <input type="number" name="country_{{ country.id }}_cases" id="country_{{ country.id }}_cases" 
+                                   value="{{ country.total_cases }}"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        </div>
+                        <div>
+                            <label for="country_{{ country.id }}_deaths" class="block text-sm font-medium text-gray-700">Muertes</label>
+                            <input type="number" name="country_{{ country.id }}_deaths" id="country_{{ country.id }}_deaths" 
+                                   value="{{ country.total_deaths }}"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        </div>
+                        <div>
+                            <label for="country_{{ country.id }}_recovered" class="block text-sm font-medium text-gray-700">Recuperados</label>
+                            <input type="number" name="country_{{ country.id }}_recovered" id="country_{{ country.id }}_recovered" 
+                                   value="{{ country.total_recovered }}"
+                                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50">
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="flex justify-end">
+            <button type="submit" 
+                    class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Guardar Cambios
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

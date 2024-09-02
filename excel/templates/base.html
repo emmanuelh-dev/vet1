@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excel App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="flex h-screen bg-gray-100">
+        <!-- Sidebar -->
+        <aside class="hidden w-64 bg-white border-r md:block">
+            <div class="p-4 border-b">
+                <h1 class="text-xl font-semibold">Excel App</h1>
+            </div>
+            <nav class="p-4">
+                <ul>
+                    <li class="mb-2">
+                        <a href="{% url 'upload' %}" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
+                            Cargar Archivo
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'dashboard'%}" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
+                            Editar
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Header -->
+            <header class="bg-white border-b md:hidden">
+                <div class="p-4 flex justify-between items-center">
+                    <h1 class="text-xl font-semibold">Excel App</h1>
+                    <button id="menuToggle" class="md:hidden">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="bg-white w-64 absolute inset-y-0 left-0 transform -translate-x-full transition duration-200 ease-in-out md:hidden">
+                <div class="p-4 border-b">
+                    <h1 class="text-xl font-semibold">Excel App</h1>
+                </div>
+                <nav class="p-4">
+                    <ul>
+                        <li class="mb-2">
+                            <a href="" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
+                                Cargar Archivo
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
+                                Editar
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Main Content Area -->
+            <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4">
+                {% block content %}
+                <!-- Your page content will go here -->
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            var menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('-translate-x-full');
+        });
+    </script>
+</body>
+</html>
