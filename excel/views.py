@@ -44,3 +44,9 @@ def dashboard(request):
 
 def upload(request):
   return render(request, "upload.html", {})
+
+def edit(request):
+  return render(request, "edit.html", {})
+
+def create(request):
+  return render(request, "create.html", {})

@@ -16,6 +16,11 @@
             <nav class="p-4">
                 <ul>
                     <li class="mb-2">
+                        <a href="{% url 'create'%}" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
+                            Nuevo
+                        </a>
+                    </li>
+                    <li class="mb-2">
                         <a href="{% url 'upload' %}" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
                             Cargar Archivo
                         </a>
@@ -26,7 +31,7 @@
                         </a>
                     </li>
                     <li class="mb-2">
-                        <a href="" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
+                        <a href="{% url 'edit' %}" class="block p-2 text-gray-700 hover:bg-gray-200 rounded">
                             Editar
                         </a>
                     </li>
