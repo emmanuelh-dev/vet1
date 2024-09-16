@@ -1,13 +1,11 @@
 from django.shortcuts import render
 from datetime import datetime, timedelta
 
-# Create your views here.
 def hello(request):
   return render(request, 'hello.html', {})
 
 
 def dashboard(request):
-    # Invented global statistics
     context = {
         'total_cases': 223456789,
         'total_deaths': 4567890,
@@ -15,7 +13,6 @@ def dashboard(request):
         'active_cases': 17654332,
     }
 
-    # Invented data for countries
     context['countries'] = [
         {'name': 'USA', 'total_cases': 45678901, 'total_deaths': 789012, 'total_recovered': 40123456},
         {'name': 'India', 'total_cases': 34567890, 'total_deaths': 456789, 'total_recovered': 31234567},
@@ -24,7 +21,6 @@ def dashboard(request):
         {'name': 'UK', 'total_cases': 9876543, 'total_deaths': 123456, 'total_recovered': 8765432},
     ]
 
-    # Invented data for the cases evolution chart
     today = datetime.now()
     context['chart_data'] = {
         'labels': [(today - timedelta(days=i)).strftime('%d-%m-%Y') for i in range(30, 0, -1)],
